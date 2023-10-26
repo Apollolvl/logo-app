@@ -1,4 +1,4 @@
-const inquirer = import('inquirer');
+const inquirer = require('inquirer')
 const fs = require("fs");
 const { Triangle, Square, Circle } = require("./lib/shape");
 
@@ -6,7 +6,7 @@ function writeToFile(fileName, answers) {
   let svgString = "";
   svgString =
     '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">';
-  svgString += "<g>";
+  svgString += "<div>";
   svgString += `${answers.shape}`;
 
   let shape;
@@ -18,11 +18,11 @@ function writeToFile(fileName, answers) {
     svgString += `<rect x="73" y="40" width="160" height="160" fill="${answers.shapeBackgroundColor}"/>`;
   } else {
     shape = new Circle();
-    svgString += `<circle cx="150" cy="115" r="80" fill="${answers.shapeBackgroundColor}"/>`;
+    svgString += `<circle cx="150" cy="100" r="80" fill="${answers.shapeBackgroundColor}"/>`;
   }
 
   svgString += `<text x="150" y="130" text-anchor="middle" font-size="45" fill="${answers.textColor}">${answers.text}</text>`;
-  svgString += "</g>";
+  svgString += "</div>";
   svgString += "</svg>";
 
   fs.writeFile(fileName, svgString, (err) => {
@@ -32,7 +32,7 @@ function writeToFile(fileName, answers) {
 
 function promptUser() {
   inquirer
-    .prompt([
+    .prompt ([
       {
         type: "input",
         message:
